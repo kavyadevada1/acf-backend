@@ -1,0 +1,20 @@
+{
+  // Typechecks the test suites, which the build config deliberately excludes.
+  //
+  // Without this, a renamed or deleted property in a test escapes static checking entirely: an
+  // assertion like `assert.equal(view.goneField, tier.alsoGone)` compares undefined with
+  // undefined and passes while proving nothing. That happened once already during the
+  // external-EOA migration, so it is checked here rather than trusted.
+  //
+  // noEmit only — test files never reach dist/. `allowImportingTsExtensions` matches how the
+  // suites actually import their helpers (`./testenv.ts`), which tsx resolves at run time.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "rootDir": ".",
+    "allowImportingTsExtensions": true
+  },
+  "include": ["src/**/*.ts"],
+  // The base config excludes test files; this config exists precisely to check them.
+  "exclude": []
+}

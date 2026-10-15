@@ -1,0 +1,53 @@
+{
+  "name": "alance-finance-user-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.scripts.json && npm run typecheck:test",
+    "typecheck:test": "tsc -p tsconfig.test.json",
+    "test": "tsx --test --test-concurrency=1 \"src/**/*.test.ts\"",
+    "backfill:root-parent": "tsx scripts/backfill-root-parent.ts",
+    "reward:worker": "tsx src/rewards/worker.ts",
+    "reward:epoch": "tsx scripts/run-reward-epoch.ts",
+    "reward:team": "tsx scripts/run-team-reward-epoch.ts",
+    "settlement:calculate": "tsx scripts/run-settlement.ts calculate",
+    "settlement:reconcile": "tsx scripts/run-settlement.ts reconcile",
+    "settlement:manifest": "tsx scripts/run-settlement.ts manifest",
+    "settlement:authorize": "tsx scripts/run-settlement-authorizer.ts",
+    "settlement:execute": "tsx scripts/run-settlement-executor.ts",
+    "dao-revenue:backfill-config": "tsx scripts/run-dao-revenue.ts backfill-config",
+    "dao-revenue:calculate": "tsx scripts/run-dao-revenue.ts calculate",
+    "dao-revenue:authorize": "tsx scripts/run-dao-revenue-authorizer.ts",
+    "dao-revenue:catch-up": "tsx scripts/run-dao-revenue.ts catch-up",
+    "dao-revenue:status": "tsx scripts/run-dao-revenue.ts status",
+    "dao-revenue:reconcile": "tsx scripts/run-dao-revenue.ts reconcile",
+    "dao-revenue:manifest": "tsx scripts/run-dao-revenue.ts manifest",
+    "dao-revenue:execute": "tsx scripts/run-dao-revenue-executor.ts execute",
+    "dao-revenue:executor": "tsx scripts/run-dao-revenue-executor.ts loop"
+  },
+  "dependencies": {
+    "@openzeppelin/merkle-tree": "^1.0.8",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5",
+    "node-cron": "^4.6.0",
+    "viem": "^2.57.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/node": "^24.0.0",
+    "@types/node-cron": "^3.0.11",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}
